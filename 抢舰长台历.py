@@ -13,7 +13,7 @@ HEADER = {
     }
 
 PAYLOAD = {
-    'award_id': 'silver-100',
+    'award_id': 'guard-3',
     'exchange_num': '1'
     }
 
@@ -45,16 +45,18 @@ while True:
 
         r = requests.post(URL, headers = HEADER, data = PAYLOAD)
         msg = '第 ' + str(counter) + ' 池' + '\n' + '时间: ' + str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
-        
+        destination = 'blossomjoker@gmail.com'
+
         if r.json().get('code') == 0:
-            sendEmail('抢到了！',msg,'582981961@qq.com')
+            title = '抢到了！'
         elif r.json().get('code') == -404:
-            sendEmail('没刷出来或者没抢到',msg,'582981961@qq.com')
+            title = '没抢到！'
         elif r.json().get('code') == -400:
-            sendEmail('小红包不够',msg,'582981961@qq.com')
+            title = '没钱了！'
         else:
-            sendEmail('这是啥情况',msg,'582981961@qq.com')
+            title = '这是啥情况'
         
+        sendEmail(title,msg,destination)
         ROUND = counter
             
     time.sleep(0.5)
