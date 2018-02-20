@@ -26,7 +26,7 @@ def sendEmail(title,message,destination):
     server.starttls()
     server.login('ringlgamesh@gmail.com','Google#9527')
 
-    msg = MIMEText(message)
+    msg = MIMEText(message,'plain','utf-8')
     msg['From'] = fromaddress
     msg['To'] = toaddress
     msg['Subject'] = (title)
