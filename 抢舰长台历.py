@@ -44,14 +44,16 @@ while True:
     if counter != ROUND:
 
         r = requests.post(URL, headers = HEADER, data = PAYLOAD)
-        print r.content
-
+        tmp = '第 ' + str(counter) + ' 池' + '\n' + '时间: ' + str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
         if r.json().get('code') == 0:
-            tmp = '完成时间: ' + str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min) + '\n\n' + r.text 
-            sendEmail('抢到了',tmp,'582981961@qq.com')
-
-        sendEmail('奖池更新','第 ' + str(counter) + ' 池' + '\n' + '时间: ' + str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min),'582981961@qq.com')
-
+            sendEmail('抢到了！',tmp,'582981961@qq.com')
+        elif r.json().get('code') == -404:
+            sendEmail('没刷出来或者没抢到',tmp,'582981961@qq.com')
+        elif r.json().get('code') == -400:
+            sendEmail('小红包不够',tmp,'582981961@qq.com')
+        else:
+            sendEmail('这是啥情况',tmp,'582981961@qq.com')
+        
         ROUND = counter
             
     time.sleep(0.5)
