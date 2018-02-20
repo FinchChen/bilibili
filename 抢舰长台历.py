@@ -13,7 +13,7 @@ HEADER = {
     }
 
 PAYLOAD = {
-    'award_id': 'guard-3',
+    'award_id': 'award-calendar',
     'exchange_num': '1'
     }
 
@@ -44,6 +44,7 @@ while True:
     if counter != ROUND:
 
         r = requests.post(URL, headers = HEADER, data = PAYLOAD)
+
         msg = '第 ' + str(counter) + ' 池' + '\n' + '时间: ' + str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
         destination = 'blossomjoker@gmail.com'
 
