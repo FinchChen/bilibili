@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-import itchat
+import requests
 
-itchat.auto_login(enableCmdQR=2,hotReload=True)
+tmp = requests.get('https://www.iyingdi.cn/feed/list/seed/v2?web=1&seed=2&system=web').json().get('feeds')[0].get('feed')
 
-#itchat.send('Hello', toUserName='filehelper')
-itchat.send_msg(msg='nihao',toUserName='@722ccbbbd38a43950ac874db9a1f10cd17f82ce8f6fecc21846f8f1bc98e7c96')
+a = tmp.get('title')
+print a.encode('unicode')
